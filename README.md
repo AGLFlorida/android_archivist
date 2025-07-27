@@ -40,13 +40,13 @@ npm install
 ## 🚀 Usage
 
 ```bash
-npx ts-node scripts/archive.ts <version> <androidVersionCode> <bundleId>
+npx tsx scripts/archive.ts <version> <androidVersionCode> <bundleId>
 ```
 
 Example:
 
 ```bash
-npx ts-node scripts/archive.ts 1.3.0 16 com.agl.nback
+npx tsx scripts/archive.ts 1.3.0 16 com.agl.nback
 ```
 
 This will:

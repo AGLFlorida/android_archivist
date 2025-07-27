@@ -42,8 +42,8 @@ start:
 
 init:
 	@echo "export CUSTOM_ARCHIVE_ROOT=\"`pwd`\"" > archive-env.zsh
-	@echo 'archive() {' >> archive-env.zsh
-	@echo '  ts-node "$$CUSTOM_ARCHIVE_ROOT/scripts/archive.ts" "$$@"' >> archive-env.zsh
+	@echo 'archivist() {' >> archive-env.zsh
+	@echo '  $$CUSTOM_ARCHIVE_ROOT/npx tsx "$$CUSTOM_ARCHIVE_ROOT/scripts/archive.ts" "$$@"' >> archive-env.zsh
 	@echo '}' >> archive-env.zsh
 	@echo "$(GREEN)✅ Created archive-env.zsh — run: source archive-env.zsh$(RESET)"
 
