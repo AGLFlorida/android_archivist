@@ -1,5 +1,4 @@
-archive/**
-!archive/.gitkeep
+# Node / npm stuff
 node_modules
 
 # Build output from TypeScript
@@ -7,9 +6,10 @@ dist/
 scripts/**/*.js
 scripts/**/*.js.map
 
-# Python bytecode
+# Python bytecode & venv
 __pycache__/
 *.pyc
+android_archive
 
 # Archive artifacts
 archive/**
@@ -19,3 +19,5 @@ archive/**
 *.log
 *.tmp
 *.swp
+
+.archiveconfig.json
