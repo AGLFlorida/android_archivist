@@ -21,3 +21,4 @@ archive/**
 *.swp
 
 .archiveconfig.json
+archive-env.zsh
