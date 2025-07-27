@@ -1,0 +1,21 @@
+archive/**
+!archive/.gitkeep
+node_modules
+
+# Build output from TypeScript
+dist/
+scripts/**/*.js
+scripts/**/*.js.map
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Archive artifacts
+archive/**
+!archive/.gitkeep
+
+# Logs and temp files (if you add them for debugging)
+*.log
+*.tmp
+*.swp
