@@ -23,7 +23,7 @@ help:
 
 venv:
 	@python3 -m venv $(VENV_DIR)
-	@echo "$(GREEN)✅ Virtual environment created in $(VENV_DIR)/$(RESET)"
+	@echo "$(GREEN)Virtual environment created in $(VENV_DIR)/$(RESET)"
 
 activate:
 	@echo "$(BLUE)Run this command to activate the venv:$(RESET)"
@@ -35,16 +35,16 @@ deactivate:
 
 clean:
 	@rm -rf $(VENV_DIR)
-	@echo "$(GREEN)🗑️  Removed virtual environment$(RESET)"
+	@echo "$(GREEN)Removed virtual environment$(RESET)"
 
 start:
-	python serve.py
+	python3 serve.py
 
 init:
 	@echo "export CUSTOM_ARCHIVE_ROOT=\"`pwd`\"" > archive-env.zsh
 	@echo 'archivist() {' >> archive-env.zsh
 	@echo '  $$CUSTOM_ARCHIVE_ROOT/npx tsx "$$CUSTOM_ARCHIVE_ROOT/scripts/archive.ts" "$$@"' >> archive-env.zsh
 	@echo '}' >> archive-env.zsh
-	@echo "$(GREEN)✅ Created archive-env.zsh — run: source archive-env.zsh$(RESET)"
+	@echo "$(GREEN)Created archive-env.zsh — run: source archive-env.zsh$(RESET)"
 
 
