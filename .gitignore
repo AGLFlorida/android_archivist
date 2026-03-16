@@ -15,10 +15,24 @@ android_archive
 archive/**
 !archive/.gitkeep
 
-# Logs and temp files (if you add them for debugging)
+# Logs and temp files
 *.log
 *.tmp
 *.swp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.iml
+
+# Environment / secrets
+.env
+.env.*
+*.pem
+*.key
 
 .archiveconfig.json
 archive-env.zsh
