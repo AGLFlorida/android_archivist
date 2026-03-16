@@ -6,7 +6,8 @@
     "test": "tsx --test scripts/archive.test.ts",
     "lint": "biome check .",
     "format": "biome format --write .",
-    "archive": "tsx scripts/archive.ts"
+    "archive": "tsx scripts/archive.ts",
+    "build": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
