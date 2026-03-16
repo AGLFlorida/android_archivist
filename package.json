@@ -3,14 +3,18 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "archive": "tsx scripts/archive.ts"
+    "test": "tsx --test scripts/archive.test.ts",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "archive": "tsx scripts/archive.ts",
+    "build": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@biomejs/biome": "^2.4.7",
     "@types/node": "^24.1.0",
     "typescript": "^5.8.3"
   },
