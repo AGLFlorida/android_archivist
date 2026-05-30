@@ -67,11 +67,16 @@ npx @aglflorida/android-archivist 1.3.0 16 com.example.myapp
 Serve the archive directory over HTTP for local browsing:
 
 ```bash
-python3 serve.py
-# → http://localhost:8000
+android-archivist-serve
 ```
 
-Reads `archiveRoot` from the same XDG config.
+Prints a clickable link and serves `archiveRoot` at `http://localhost:8000`. Stop with `Ctrl+C`.
+
+Reads `archiveRoot` from the same XDG config. Can also be run directly:
+
+```bash
+python3 serve.py
+```
 
 ## Development
 
@@ -96,6 +101,7 @@ pip install -r requirements-dev.txt
 | `npm run lint:fix` | Auto-fix lint issues |
 | `npm run verify` | Full check (lint + test + typecheck) |
 | `npm run archive` | Run archive script directly |
+| `android-archivist-serve` | Start local file server with browser link |
 
 ## Makefile
 
