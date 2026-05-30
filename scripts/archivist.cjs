@@ -4,10 +4,9 @@
 const path = require("node:path");
 const { spawnSync } = require("node:child_process");
 
-const tsxBin = path.resolve(__dirname, "..", "node_modules", ".bin", "tsx");
-const archiveTs = path.join(__dirname, "archive.ts");
+const archiveCjs = path.join(__dirname, "..", "dist", "archive.js");
 const args = process.argv.slice(2);
-const result = spawnSync(tsxBin, [archiveTs, ...args], {
+const result = spawnSync(process.execPath, [archiveCjs, ...args], {
   stdio: "inherit",
   env: process.env,
 });

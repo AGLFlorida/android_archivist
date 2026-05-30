@@ -9,8 +9,7 @@
     "android-archivist-serve": "./scripts/serve.cjs"
   },
   "files": [
-    "index.js",
-    "scripts/archive.ts",
+    "dist/",
     "scripts/archivist.cjs",
     "scripts/setup.js",
     "scripts/serve.cjs",
@@ -20,6 +19,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "test": "tsx --test scripts/archive.test.ts",
     "test:py": "python3 -m pytest tests/",
     "lint": "biome check .",
@@ -52,9 +52,8 @@
   "devDependencies": {
     "@biomejs/biome": "^2.4.16",
     "@types/node": "^25.9.1",
+    "tsx": "^4.22.3",
     "typescript": "^6.0.3"
   },
-  "dependencies": {
-    "tsx": "^4.22.3"
-  }
+  "dependencies": {}
 }
