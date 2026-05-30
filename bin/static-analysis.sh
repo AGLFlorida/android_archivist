@@ -4,8 +4,7 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 RESET='\033[0m'
 
-# Actions that are expected to lag behind (e.g. no v6 exists yet)
-EXCLUDE_LIST=("actions/setup-python")
+EXCLUDE_LIST=()
 
 MIN_VERSION=6
 
