@@ -5,6 +5,7 @@ export interface ArchivePaths {
   archiveDir: string;
   aabSrc: string;
   mapSrc: string;
+  jsSrcMapSrc: string;
 }
 
 export function buildArchivePaths(
@@ -36,6 +37,17 @@ export function buildArchivePaths(
       "release",
       "mapping.txt",
     ),
+    jsSrcMapSrc: join(
+      projectRoot,
+      "android",
+      "app",
+      "build",
+      "intermediates",
+      "sourcemaps",
+      "react",
+      "release",
+      "index.android.bundle.packager.map",
+    ),
   };
 }
 
@@ -46,7 +58,7 @@ export function runArchive(
   archiveRoot: string,
   projectRoot: string,
 ): string {
-  const { archiveDir, aabSrc, mapSrc } = buildArchivePaths(
+  const { archiveDir, aabSrc, mapSrc, jsSrcMapSrc } = buildArchivePaths(
     archiveRoot,
     bundleId,
     version,
@@ -60,6 +72,7 @@ export function runArchive(
 
   cpSync(aabSrc, join(archiveDir, "app-release.aab"));
   cpSync(mapSrc, join(archiveDir, "mapping.txt"));
+  cpSync(jsSrcMapSrc, join(archiveDir, `${versionCode}.sourcemap`));
 
   return archiveDir;
 }

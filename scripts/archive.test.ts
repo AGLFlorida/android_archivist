@@ -23,6 +23,10 @@ test("buildArchivePaths returns correct structure", () => {
     paths.mapSrc,
     "/project/android/app/build/outputs/mapping/release/mapping.txt",
   );
+  assert.equal(
+    paths.jsSrcMapSrc,
+    "/project/android/app/build/intermediates/sourcemaps/react/release/index.android.bundle.packager.map",
+  );
 });
 
 test("buildArchivePaths segments version, versionCode, and bundleId correctly", () => {
@@ -31,6 +35,7 @@ test("buildArchivePaths segments version, versionCode, and bundleId correctly", 
   assert.ok(paths.archiveDir.endsWith("org.foo/2.3.4/99"));
   assert.ok(paths.aabSrc.startsWith("/cwd"));
   assert.ok(paths.mapSrc.startsWith("/cwd"));
+  assert.ok(paths.jsSrcMapSrc.startsWith("/cwd"));
 });
 
 test("runArchive copies aab and mapping to archive directory", () => {
@@ -56,10 +61,25 @@ test("runArchive copies aab and mapping to archive directory", () => {
     "mapping",
     "release",
   );
+  const jsSrcMapDir = join(
+    projectRoot,
+    "android",
+    "app",
+    "build",
+    "intermediates",
+    "sourcemaps",
+    "react",
+    "release",
+  );
   mkdirSync(aabDir, { recursive: true });
   mkdirSync(mapDir, { recursive: true });
+  mkdirSync(jsSrcMapDir, { recursive: true });
   writeFileSync(join(aabDir, "app-release.aab"), "fake aab");
   writeFileSync(join(mapDir, "mapping.txt"), "fake mapping");
+  writeFileSync(
+    join(jsSrcMapDir, "index.android.bundle.packager.map"),
+    "fake js sourcemap",
+  );
 
   const archiveDir = runArchive(
     "1.0.0",
@@ -77,6 +97,10 @@ test("runArchive copies aab and mapping to archive directory", () => {
   assert.equal(
     readFileSync(join(archiveDir, "mapping.txt"), "utf-8"),
     "fake mapping",
+  );
+  assert.equal(
+    readFileSync(join(archiveDir, "10.sourcemap"), "utf-8"),
+    "fake js sourcemap",
   );
 
   rmSync(tmp, { recursive: true, force: true });
@@ -105,10 +129,22 @@ test("runArchive creates nested archive directory if it does not exist", () => {
     "mapping",
     "release",
   );
+  const jsSrcMapDir = join(
+    projectRoot,
+    "android",
+    "app",
+    "build",
+    "intermediates",
+    "sourcemaps",
+    "react",
+    "release",
+  );
   mkdirSync(aabDir, { recursive: true });
   mkdirSync(mapDir, { recursive: true });
+  mkdirSync(jsSrcMapDir, { recursive: true });
   writeFileSync(join(aabDir, "app-release.aab"), "");
   writeFileSync(join(mapDir, "mapping.txt"), "");
+  writeFileSync(join(jsSrcMapDir, "index.android.bundle.packager.map"), "");
 
   assert.doesNotThrow(() =>
     runArchive("1.0.0", "1", "com.example", archiveRoot, projectRoot),
