@@ -1,31 +1,30 @@
-# Android Archive Tool
+# @aglflorida/android-archivist
 
-A simple CLI tool (TypeScript + Python) to archive Android release artifacts (`.aab`, `mapping.txt`) to a structured folder based on version, version code, and bundle ID.
+CLI tool to archive Android release artifacts (`.aab`, `mapping.txt`, sourcemap) into a structured folder hierarchy keyed by bundle ID, version, and version code.
 
----
-
-## 📂 Folder Structure
-
-```
-archive/
-  ├── com.example.myapp/
-  │   ├── 1.3.0/
-  │   │   └── 16/
-  │   │       ├── app-release.aab
-  │   │       └── mapping.txt
-```
-
----
-
-## ⚙️ Setup
-
-### 1. Clone this repo and install deps:
+## Installation
 
 ```bash
-npm install
+npm install -g @aglflorida/android-archivist
+# or as a dev dependency in your project
+npm install --save-dev @aglflorida/android-archivist
 ```
 
-### 2. Create a local `.archiveconfig.json` file in the root:
+After install, run the setup command once to configure:
+
+```bash
+android-archivist-init
+```
+
+Config is stored at the XDG location:
+
+```
+$XDG_CONFIG_HOME/android-archivist/config.json
+# defaults to:
+~/.config/android-archivist/config.json
+```
+
+Or create it manually:
 
 ```json
 {
@@ -33,72 +32,79 @@ npm install
 }
 ```
 
-**Important**: This file is ignored via `.gitignore`, so it won't be committed to version control.
-
----
-
-## 🚀 Usage
+## Usage
 
 ```bash
-npx tsx scripts/archive.ts <version> <androidVersionCode> <bundleId>
+android-archivist <version> <androidVersionCode> <bundleId>
 ```
 
 Example:
 
 ```bash
-npx tsx scripts/archive.ts 1.3.0 16 com.agl.nback
+android-archivist 1.3.0 16 com.example.myapp
 ```
 
-This will:
+This copies from `android/app/build/outputs/...` into:
 
-- Look for the AAB and mapping files in `android/app/build/outputs/...`
-- Copy them to: `archiveRoot/com.agl.nback/1.3.0/16/`
+```
+archiveRoot/
+  com.example.myapp/
+    1.3.0/
+      16/
+        app-release.aab
+        mapping.txt
+        16.sourcemap
+```
 
----
+Or via `npx` without installing:
 
-## 🐍 Local File Server (Optional)
+```bash
+npx @aglflorida/android-archivist 1.3.0 16 com.example.myapp
+```
 
-To serve local files via HTTP:
+## Local File Server
+
+Serve the archive directory over HTTP for local browsing:
 
 ```bash
 python3 serve.py
+# → http://localhost:8000
 ```
 
-Serves from the current working directory on port 8000.
+Reads `archiveRoot` from the same XDG config.
 
----
+## Development
 
-## 🛠 Makefile Helpers
+### Prerequisites
+
+- Node.js >= 22
+- Python >= 3.12
 
 ```bash
-make venv        # Create python venv in ./android_archive
-make activate    # Echo activation command
-make clean       # Remove the venv
+npm install
+pip install -r requirements-dev.txt
 ```
 
----
+### Scripts
 
-## ❌ Common Errors
+| Command | Description |
+|---|---|
+| `npm test` | TypeScript tests |
+| `npm run test:py` | Python tests |
+| `npm run lint` | Biome lint (TypeScript/JS) |
+| `npm run lint:py` | Ruff lint (Python) |
+| `npm run lint:fix` | Auto-fix lint issues |
+| `npm run verify` | Full check (lint + test + typecheck) |
+| `npm run archive` | Run archive script directly |
 
-> "Missing or invalid .archiveconfig.json with archiveRoot"
+## Makefile
 
-Make sure you created `.archiveconfig.json` and it looks like:
-
-```json
-{
-  "archiveRoot": "/your/path/here"
-}
+```bash
+make venv     # Create Python venv in ./android_archive
+make start    # Start the Python file server
+make clean    # Remove venv
 ```
-
----
-
-## 📦 Output
-
-Artifacts are preserved in a deterministic and human-readable folder hierarchy.
-
----
 
 ## License
 
 MIT
-

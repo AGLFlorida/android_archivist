@@ -4,6 +4,8 @@ node_modules
 # Build output from TypeScript
 dist/
 scripts/**/*.js
+!scripts/archivist.cjs
+!scripts/setup.js
 scripts/**/*.js.map
 
 # Python bytecode & venv
@@ -36,3 +38,10 @@ Thumbs.db
 
 .archiveconfig.json
 archive-env.zsh
+
+change-summary.md 
+ralph-loop.local.*
+ralph.local.*
+
+wiki/**
+!.gitkeep

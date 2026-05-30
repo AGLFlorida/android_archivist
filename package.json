@@ -1,24 +1,58 @@
 {
-  "name": "android_archivist",
+  "name": "@aglflorida/android-archivist",
   "version": "0.1.0",
+  "description": "CLI tool to archive Android release artifacts (.aab, mapping.txt, sourcemap) into a structured folder hierarchy",
   "main": "index.js",
+  "bin": {
+    "android-archivist": "./scripts/archivist.cjs",
+    "android-archivist-init": "./scripts/setup.js"
+  },
+  "files": [
+    "index.js",
+    "scripts/archive.ts",
+    "scripts/archivist.cjs",
+    "scripts/setup.js",
+    "serve.py"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "test": "tsx --test scripts/archive.test.ts",
+    "test:py": "python3 -m pytest tests/",
     "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "lint:py": "ruff check .",
     "format": "biome format --write .",
     "archive": "tsx scripts/archive.ts",
-    "build": "tsc --noEmit"
+    "verify": "npm run lint && npm run lint:py && npm test && npm run test:py && npx tsc --noEmit"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "keywords": [
+    "android",
+    "archive",
+    "aab",
+    "react-native",
+    "build"
+  ],
+  "author": "brandon@aglflorida.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AGLFlorida/android-archivist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AGLFlorida/android-archivist/issues"
+  },
+  "homepage": "https://github.com/AGLFlorida/android-archivist#readme",
   "devDependencies": {
-    "@biomejs/biome": "^2.4.7",
-    "@types/node": "^25.5.0",
-    "typescript": "^5.8.3"
+    "@biomejs/biome": "^2.4.16",
+    "@types/node": "^25.9.1",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
-    "tsx": "^4.20.3"
+    "tsx": "^4.22.3"
   }
 }

@@ -1,4 +1,5 @@
 import { cpSync, existsSync, mkdirSync, readFileSync } from "node:fs";
+import { homedir } from "node:os";
 import { join, resolve } from "node:path";
 
 export interface ArchivePaths {
@@ -77,26 +78,36 @@ export function runArchive(
   return archiveDir;
 }
 
+export function readXdgConfig(): { archiveRoot: string } | null {
+  const base = process.env.XDG_CONFIG_HOME ?? join(homedir(), ".config");
+  const configPath = join(base, "android-archivist", "config.json");
+  try {
+    const raw = readFileSync(configPath, "utf-8");
+    const cfg = JSON.parse(raw) as { archiveRoot?: string };
+    return cfg.archiveRoot ? { archiveRoot: cfg.archiveRoot } : null;
+  } catch {
+    return null;
+  }
+}
+
 if (require.main === module) {
   const [version, versionCode, bundleId] = process.argv.slice(2);
 
   if (!version || !versionCode || !bundleId) {
     console.error(
-      "Usage: tsx archive.ts <version> <androidVersionCode> <bundleId>",
+      "Usage: android-archivist <version> <androidVersionCode> <bundleId>",
     );
     process.exit(1);
   }
 
-  let archiveRoot: string;
-  try {
-    const configPath = join(__dirname, "..", ".archiveconfig.json");
-    const config = JSON.parse(readFileSync(configPath, "utf-8")) as {
-      archiveRoot?: string;
-    };
-    archiveRoot = config.archiveRoot ?? "";
-    if (!archiveRoot) throw new Error();
-  } catch {
-    console.error("Missing or invalid .archiveconfig.json with archiveRoot");
+  const cfg = readXdgConfig();
+  if (!cfg) {
+    const xdgBase = process.env.XDG_CONFIG_HOME ?? join(homedir(), ".config");
+    console.error(
+      `Missing config. Run \`npx android-archivist --setup\` or create:\n` +
+        `  ${join(xdgBase, "android-archivist", "config.json")}\n` +
+        `  with { "archiveRoot": "/path/to/archives" }`,
+    );
     process.exit(1);
   }
 
@@ -104,7 +115,7 @@ if (require.main === module) {
     version,
     versionCode,
     bundleId,
-    archiveRoot,
+    cfg.archiveRoot,
     process.cwd(),
   );
   console.log(`Copied to ${archiveDir}`);
