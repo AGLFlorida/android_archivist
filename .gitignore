@@ -40,3 +40,6 @@ archive-env.zsh
 change-summary.md 
 ralph-loop.local.*
 ralph.local.*
+
+wiki/**
+!.gitkeep

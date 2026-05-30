@@ -7,7 +7,7 @@
     "lint": "biome check .",
     "format": "biome format --write .",
     "archive": "tsx scripts/archive.ts",
-    "build": "tsc --noEmit"
+    "verify": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
