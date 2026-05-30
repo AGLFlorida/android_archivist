@@ -5,6 +5,7 @@ node_modules
 dist/
 scripts/**/*.js
 !scripts/archivist.cjs
+!scripts/serve.cjs
 !scripts/setup.js
 scripts/**/*.js.map
 

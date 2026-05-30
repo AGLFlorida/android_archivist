@@ -5,13 +5,15 @@
   "main": "index.js",
   "bin": {
     "android-archivist": "./scripts/archivist.cjs",
-    "android-archivist-init": "./scripts/setup.js"
+    "android-archivist-init": "./scripts/setup.js",
+    "android-archivist-serve": "./scripts/serve.cjs"
   },
   "files": [
     "index.js",
     "scripts/archive.ts",
     "scripts/archivist.cjs",
     "scripts/setup.js",
+    "scripts/serve.cjs",
     "serve.py"
   ],
   "engines": {
