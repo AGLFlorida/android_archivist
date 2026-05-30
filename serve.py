@@ -24,7 +24,7 @@ def load_archive_root() -> str:
         return root
     except Exception:
         print(f"Missing or invalid config at {config_path}.")
-        print("Run `npx android-archivist --setup` or create the config manually.")
+        print("Run `android-archivist-init` or create the config manually.")
         sys.exit(1)
 
 
