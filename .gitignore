@@ -36,3 +36,7 @@ Thumbs.db
 
 .archiveconfig.json
 archive-env.zsh
+
+change-summary.md 
+ralph-loop.local.*
+ralph.local.*
