@@ -4,6 +4,8 @@ node_modules
 # Build output from TypeScript
 dist/
 scripts/**/*.js
+!scripts/archivist.cjs
+!scripts/postinstall.js
 scripts/**/*.js.map
 
 # Python bytecode & venv
