@@ -7,7 +7,7 @@ const { spawn } = require("node:child_process");
 const PORT = 8000;
 const servePy = path.join(__dirname, "..", "serve.py");
 
-const child = spawn("python3", [servePy], {
+const child = spawn("python3", ["-u", servePy], {
   stdio: ["inherit", "pipe", "inherit"],
 });
 
