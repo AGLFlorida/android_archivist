@@ -1,0 +1,42 @@
+name: Sync Version
+
+on:
+  workflow_call:
+    inputs:
+      version_type:
+        required: true
+        type: string
+    outputs:
+      version:
+        description: The new version after bumping
+        value: ${{ jobs.bump.outputs.version }}
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.bump.outputs.version }}
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Bump version
+        id: bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npm version ${{ inputs.version_type }} --no-git-tag-version
+          git add package.json package-lock.json
+          git commit -m "chore: bump version [skip ci]"
+          git push
+          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
