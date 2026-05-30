@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_call:
 
 jobs:
   ci:
@@ -34,4 +35,4 @@ jobs:
 
       - run: npm run test:py
 
-      - run: tsc --noEmit
+      - run: npx tsc --noEmit
