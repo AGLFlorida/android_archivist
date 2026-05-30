@@ -5,7 +5,7 @@ node_modules
 dist/
 scripts/**/*.js
 !scripts/archivist.cjs
-!scripts/postinstall.js
+!scripts/setup.js
 scripts/**/*.js.map
 
 # Python bytecode & venv

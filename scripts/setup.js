@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-// XDG-compliant interactive onboarding — runs as npm postinstall.
-// Skipped in CI or when stdout is not a TTY.
+// Interactive XDG setup — run explicitly via `android-archivist-init` or `npm run setup`.
 // Config is written to: $XDG_CONFIG_HOME/android-archivist/config.json
 //                    or: ~/.config/android-archivist/config.json
 
@@ -32,12 +31,12 @@ if (existing?.archiveRoot) {
   process.exit(0);
 }
 
-if (!process.stdout.isTTY || process.env.CI) {
-  console.log(
-    `android-archivist: run "npx android-archivist --setup" to configure, ` +
-      `or create ${configFile} with { "archiveRoot": "/path/to/archives" }.`,
+if (!process.stdout.isTTY) {
+  console.error(
+    `android-archivist: setup requires an interactive terminal.\n` +
+      `Create ${configFile} manually with { "archiveRoot": "/path/to/archives" }.`,
   );
-  process.exit(0);
+  process.exit(1);
 }
 
 const rl = readline.createInterface({
@@ -51,8 +50,8 @@ rl.question(
     rl.close();
     const archiveRoot = answer.trim();
     if (!archiveRoot) {
-      console.error("android-archivist: No path provided — skipping setup.");
-      process.exit(0);
+      console.error("android-archivist: No path provided — aborting.");
+      process.exit(1);
     }
     fs.mkdirSync(configDir, { recursive: true });
     fs.writeFileSync(

@@ -10,7 +10,13 @@ npm install -g @aglflorida/android-archivist
 npm install --save-dev @aglflorida/android-archivist
 ```
 
-On first install, an interactive prompt will ask you for the archive root path. Config is stored at the XDG location:
+After install, run the setup command once to configure:
+
+```bash
+android-archivist-init
+```
+
+Config is stored at the XDG location:
 
 ```
 $XDG_CONFIG_HOME/android-archivist/config.json
@@ -18,7 +24,7 @@ $XDG_CONFIG_HOME/android-archivist/config.json
 ~/.config/android-archivist/config.json
 ```
 
-To configure manually, create that file with:
+Or create it manually:
 
 ```json
 {

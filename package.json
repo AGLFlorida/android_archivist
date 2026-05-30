@@ -4,20 +4,20 @@
   "description": "CLI tool to archive Android release artifacts (.aab, mapping.txt, sourcemap) into a structured folder hierarchy",
   "main": "index.js",
   "bin": {
-    "android-archivist": "./scripts/archivist.cjs"
+    "android-archivist": "./scripts/archivist.cjs",
+    "android-archivist-init": "./scripts/setup.js"
   },
   "files": [
     "index.js",
     "scripts/archive.ts",
     "scripts/archivist.cjs",
-    "scripts/postinstall.js",
+    "scripts/setup.js",
     "serve.py"
   ],
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "postinstall": "node scripts/postinstall.js",
     "test": "tsx --test scripts/archive.test.ts",
     "test:py": "python3 -m pytest tests/",
     "lint": "biome check .",
