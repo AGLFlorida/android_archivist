@@ -16,7 +16,7 @@
     "serve.py"
   ],
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
@@ -50,10 +50,14 @@
   },
   "homepage": "https://github.com/AGLFlorida/android-archivist#readme",
   "devDependencies": {
-    "@biomejs/biome": "^2.4.16",
-    "@types/node": "^25.9.1",
+    "@biomejs/biome": "^2.6.8",
+    "@types/node": "^26.6.6",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "allowScripts": {
+    "fsevents@2.3.3": true,
+    "esbuild@0.28.2": true
+  }
 }

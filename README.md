@@ -92,16 +92,16 @@ pip install -r requirements-dev.txt
 
 ### Scripts
 
-| Command | Description |
-|---|---|
-| `npm run build` | Compile `scripts/archive.ts` → `dist/archive.js` |
-| `npm test` | TypeScript tests |
-| `npm run test:py` | Python tests |
-| `npm run lint` | Biome lint (TypeScript/JS) |
-| `npm run lint:py` | Ruff lint (Python) |
-| `npm run lint:fix` | Auto-fix lint issues |
-| `npm run verify` | Full check (lint + test + typecheck) |
-| `android-archivist-serve` | Start local file server with browser link |
+| Command                   | Description                                      |
+| ------------------------- | ------------------------------------------------ |
+| `npm run build`           | Compile `scripts/archive.ts` → `dist/archive.js` |
+| `npm test`                | TypeScript tests                                 |
+| `npm run test:py`         | Python tests                                     |
+| `npm run lint`            | Biome lint (TypeScript/JS)                       |
+| `npm run lint:py`         | Ruff lint (Python)                               |
+| `npm run lint:fix`        | Auto-fix lint issues                             |
+| `npm run verify`          | Full check (lint + test + typecheck)             |
+| `android-archivist-serve` | Start local file server with browser link        |
 
 ## Makefile
 

@@ -8,8 +8,8 @@ updates:
     groups:
       dev-tooling:
         patterns:
-          - '@biomejs/*'
-          - '@types/*'
+          - "@biomejs/*"
+          - "@types/*"
           - typescript
       runtime-deps:
         patterns:
@@ -34,4 +34,4 @@ updates:
     groups:
       github-actions:
         patterns:
-          - '*'
+          - "*"
