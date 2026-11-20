@@ -16,6 +16,7 @@ jobs:
       contents: write
     outputs:
       new_version: ${{ steps.validate_version.outputs.new_version }}
+      is_prerelease: ${{ steps.validate_version.outputs.is_prerelease }}
 
     steps:
       - name: Checkout code
@@ -76,6 +77,7 @@ jobs:
 
   publish:
     needs: release
+    if: needs.release.outputs.is_prerelease != 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
